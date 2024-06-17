@@ -4,21 +4,27 @@ require 'pry'
 # remove_strawberry(contacts)
 def contacts
   {
-    "Jon Snow" => {
-      name: "Jon",
-      email: "jon_snow@thewall.we",
-      favorite_ice_cream_flavors: ["chocolate", "vanilla"]
+    'Jon Snow' => {
+      name: 'Jon',
+      email: 'jon_snow@thewall.we',
+      favorite_ice_cream_flavors: %w[chocolate vanilla]
     },
-    "Freddie Mercury" => {
-      name: "Freddie",
-      email: "freddie@mercury.com",
-      favorite_ice_cream_flavors: ["strawberry", "cookie dough", "mint chip"]
+    'Freddie Mercury' => {
+      name: 'Freddie',
+      email: 'freddie@mercury.com',
+      favorite_ice_cream_flavors: ['strawberry', 'cookie dough', 'mint chip']
     }
   }
 end
 
 def remove_strawberry(contacts)
-  # your code here!
+  contacts.each do |person, contact_details_hash|
+    next unless person == 'Freddie Mercury'
+
+    contact_details_hash.each do |attribute, data|
+      data.delete_if { |ice_cream| ice_cream == 'strawberry' } if attribute == :favorite_ice_cream_flavors
+    end
+  end
 end
 
 # print the output to the terminal for inspection
